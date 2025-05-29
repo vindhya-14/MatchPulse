@@ -19,30 +19,30 @@ MatchPulse is a frontend web application built with Vite. It tells the Soccer up
 
 1. Clone the repository:
 
-   ```bash
+   bash
    git clone https://github.com/yourusername/matchpulse.git
    cd matchpulse
-````
+
 
 2. Install dependencies:
 
-   ```bash
+  
    npm install
-   ```
+ 
 
 3. Create a `.env` file in the root directory and set your backend API URL:
 
-   ```env
+  
    VITE_API_BASE_URL=https://your-backend-service.onrender.com
-   ```
+  
 
 ## Development
 
 Start the development server with hot reload:
 
-```bash
+
 npm run dev
-```
+
 
 Open your browser at `http://localhost:5173` (or the URL printed in your terminal).
 
@@ -50,9 +50,9 @@ Open your browser at `http://localhost:5173` (or the URL printed in your termina
 
 Build the production optimized app:
 
-```bash
+
 npm run build
-```
+
 
 The build output will be in the `dist` directory.
 
@@ -60,5 +60,5 @@ The build output will be in the `dist` directory.
 
 Make sure your deployment platform is set to:
 
-* **Build command:** `npm install && npm run build`
-* **Publish directory:** `dist`
+**Build command:** `npm install && npm run build`
+**Publish directory:** `dist`
