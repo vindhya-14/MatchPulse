@@ -5,8 +5,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/matches")
+    fetch(`${API_URL}/api/matches`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch matches");
@@ -19,7 +21,7 @@ function App() {
         setError(err.message);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [API_URL]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-800 via-indigo-800 to-purple-900 text-white relative overflow-hidden">
@@ -196,7 +198,6 @@ function App() {
                   key={match.id}
                   className="bg-gray-900/70 backdrop-blur-md rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300"
                 >
-                  {/* Match Header */}
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4">
                     <div className="flex justify-between items-center">
                       {match.competition && (
@@ -227,21 +228,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-
-                      <div className="mx-4 text-center">
-                        <div className="bg-gray-800/50 rounded-lg px-4 py-2">
-                          <span className="text-white font-bold text-lg">
-                            VS
-                          </span>
-                        </div>
-                        <div className="mt-2 text-xs text-gray-300">
-                          {new Date(match.utcDate).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </div>
-                      </div>
-
+                      <div className="text-center px-4 text-gray-400">vs</div>
                       <div className="text-center flex-1">
                         <div className="font-bold text-white text-lg">
                           {match.awayTeam.name}
@@ -254,109 +241,11 @@ function App() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Match Details */}
-                  <div className="border-t border-gray-700/50 px-6 py-4 bg-gray-800/30">
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div className="flex items-center">
-                        <svg
-                          className="w-5 h-5 text-gray-400 mr-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
-                        <span className="text-gray-300">
-                          {new Date(match.utcDate).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <svg
-                          className="w-5 h-5 text-gray-400 mr-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                        <span className="text-gray-300">
-                          {match.venue || "TBD"}
-                        </span>
-                      </div>
-                      {match.matchday && (
-                        <div className="flex items-center col-span-2">
-                          <svg
-                            className="w-5 h-5 text-gray-400 mr-2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                            />
-                          </svg>
-                          <span className="text-gray-300">
-                            Matchday {match.matchday}
-                          </span>
-                        </div>
-                      )}
-                      <div className="flex items-center col-span-2">
-                        <svg
-                          className="w-5 h-5 text-gray-400 mr-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z"
-                          />
-                        </svg>
-                        <span className="text-gray-300">
-                          Status:{" "}
-                          <span className="font-medium capitalize">
-                            {match.status.toLowerCase()}
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>
           )}
         </main>
-
-        {/* Footer */}
-        <footer className="mt-16 text-center text-gray-400 text-sm pb-8">
-          <p>
-            © {new Date().getFullYear()} Soccer Matches Dashboard. All rights
-            reserved.
-          </p>
-          <p className="mt-1">Data provided by Football API</p>
-        </footer>
       </div>
     </div>
   );
