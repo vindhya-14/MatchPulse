@@ -8,6 +8,12 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+app.use(
+  cors({
+    origin: "https://matchpulse-1.onrender.com",
+  })
+);
+
 const API_URL = "https://api.football-data.org/v4/competitions";
 
 const TOKEN = process.env.API_KEY;
