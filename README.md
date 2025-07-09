@@ -1,6 +1,6 @@
 # MatchPulse
 
-MatchPulse is a frontend web application built with Vite. It tells the Soccer upcoming match updates.It connects to a backend service to provide its core functionality.
+MatchPulse is a full stack web application built with Vite. It tells the Soccer upcoming match updates.It connects to a backend service to provide its core functionality.
 
 ## Features
 
