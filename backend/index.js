@@ -16,6 +16,10 @@ app.use(
   })
 );
 
+app.get('/api/ping', (req, res) => {
+  res.send('Server is awake!');
+});
+
 
 
 const TOKEN = process.env.API_KEY;
